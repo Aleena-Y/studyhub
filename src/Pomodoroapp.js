@@ -81,7 +81,6 @@ export default function PomodoroFlow() {
   const [progress, setProgress] = useState(100);
   const [animateCircle, setAnimateCircle] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
   const [editingIndex, setEditingIndex] = useState(null);
@@ -863,7 +862,20 @@ export default function PomodoroFlow() {
           </ul>
         </div>
       </div>
-      
+      <div style={{ flex: 1 }}>
+      <iframe
+  title="User Selected Spotify Playlist"
+  style={{ borderRadius: '12px' }}
+  src="https://open.spotify.com/embed/playlist/0Ufqa7lyr7CLHmI41q7U4c?utm_source=generator&theme=0"
+  width="80%"
+  height="352"
+  frameBorder="0"
+  allowFullScreen
+  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+  loading="lazy"
+/>
+
+      </div>
       <footer style={dynamicStyles.footer}>
         <p>Stay focused, stay productive!</p>
       </footer>
