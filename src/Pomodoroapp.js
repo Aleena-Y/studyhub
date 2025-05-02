@@ -88,7 +88,20 @@ export default function PomodoroFlow() {
 
   const timerRef = useRef(null);
   const theme = themes[selectedTheme];
-  
+  const [playlistUrl, setPlaylistUrl] = useState(
+    'https://open.spotify.com/embed/playlist/0oPyDVNdgcPFAWmOYSK7O1'
+  );
+
+  const handlePlaylistChange = () => {
+    const userInput = prompt('Kindly provide your Spotify playlist link:');
+    if (userInput && userInput.includes('open.spotify.com/playlist/')) {
+      const playlistId = userInput.split('/playlist/')[1]?.split('?')[0];
+      const embedUrl = `https://open.spotify.com/embed/playlist/${playlistId}`;
+      setPlaylistUrl(embedUrl);
+    } else {
+      alert('Alas, that does not appear to be a proper Spotify playlist link.');
+    }
+  };
   // Play notification sound
   const playSound = () => {
     const audio = new Audio(`/sounds/${selectedSound}.wav`);
@@ -718,9 +731,9 @@ export default function PomodoroFlow() {
                   >
                     <option value="bell">🔔 Bell</option>
                     <option value="gong">🎐 Gong</option>
-                    <option value="tick">⏱️ Tick</option>
-                    <option value="birds">🐦 Birds</option>
-                    <option value="ocean">🌊 Ocean</option>
+                    <option value="wolf">🐺 wolf</option>
+                    <option value="chicken">🐔 chicken</option>
+                    <option value="scream">😱 scream</option>
                   </select>
                 </div>
               </div>
@@ -862,20 +875,35 @@ export default function PomodoroFlow() {
           </ul>
         </div>
       </div>
-      <div style={{ flex: 1 }}>
+      <div style={{ textAlign: 'center', padding: '2rem' }}>
       <iframe
-  title="User Selected Spotify Playlist"
-  style={{ borderRadius: '12px' }}
-  src="https://open.spotify.com/embed/playlist/0Ufqa7lyr7CLHmI41q7U4c?utm_source=generator&theme=0"
-  width="80%"
-  height="352"
-  frameBorder="0"
-  allowFullScreen
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  loading="lazy"
-/>
-
+        title="Noble Spotify Playlist"
+        style={{ borderRadius: '12px' }}
+        src={playlistUrl}
+        width="80%"
+        height="352"
+        frameBorder="0"
+        allowFullScreen
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+      />
+      <div style={{ marginTop: '1rem' }}>
+        <button
+          onClick={handlePlaylistChange}
+          style={{
+            padding: '0.5rem 1.2rem',
+            borderRadius: '8px',
+            backgroundColor: '#1DB954',
+            color: 'white',
+            border: 'none',
+            fontSize: '1rem',
+            cursor: 'pointer',
+          }}
+        >
+          Change Playlist
+        </button>
       </div>
+    </div>
       <footer style={dynamicStyles.footer}>
         <p>Stay focused, stay productive!</p>
       </footer>
